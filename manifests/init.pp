@@ -1,7 +1,7 @@
 class bundler {
 
-  package { "bundler": 
-    ensure   => installed, 
+  package { "bundler":
+    ensure   => installed,
     provider => gem,
   }
 
