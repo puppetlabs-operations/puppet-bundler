@@ -17,7 +17,7 @@
 #
 define bundler::install($gem_bindir = '/var/lib/gems/1.8/bin') {
 
-  require bundler
+  include bundler
 
   exec { "bundle install ${name}" :
     command   => 'bundle install',
