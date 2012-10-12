@@ -15,16 +15,33 @@
 #    require => Sinatra::App['boardie'],
 #  }
 #
-define bundler::install($gem_bindir = '/var/lib/gems/1.8/bin') {
+define bundler::install(
+  $user       = 'root',
+  $group      = 'root',
+  $deployment = false,
+  $without    = undef,
+) {
 
+  include ruby::params
   include bundler
 
-  exec { "bundle install ${name}" :
-    command   => 'bundle install',
-    cwd       => $name,
-    path      => "/bin:/usr/bin:${gem_bindir}",
-    unless    => 'bundle check',
-    require   => Package['bundler'],
-    logoutput => on_failure,
+  if $without { $without_real = " --without ${without}" }
+  else        { $without_real = '' }
+
+  $command = $deployment ? {
+    true  => "bundle install --deployment${without_real}",
+    false => "bundle install${without_real}",
+  }
+
+  exec { "bundle install ${name}":
+    user        => $user,
+    group       => $group,
+    command     => $command,
+    cwd         => $name,
+    path        => "/bin:/usr/bin:/usr/local/bin:${ruby::params::gem_binpath}",
+    unless      => 'bundle check',
+    require     => Package['bundler'],
+    logoutput   => on_failure,
+    environment => "HOME='${name}'",
   }
 }
