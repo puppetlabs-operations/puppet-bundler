@@ -22,7 +22,6 @@ define bundler::install(
   $without    = undef,
 ) {
 
-  include ruby::params
   include bundler
 
   if $without { $without_real = " --without ${without}" }
@@ -38,7 +37,7 @@ define bundler::install(
     group       => $group,
     command     => $command,
     cwd         => $name,
-    path        => "/bin:/usr/bin:/usr/local/bin:${ruby::params::gem_binpath}",
+    path        => '/bin:/usr/bin:/usr/local/bin',
     unless      => 'bundle check',
     require     => Package['bundler'],
     logoutput   => on_failure,
