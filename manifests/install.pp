@@ -20,6 +20,7 @@ define bundler::install(
   $group      = 'root',
   $deployment = false,
   $without    = undef,
+  $logoutput  = on_failure,
 ) {
 
   include bundler
@@ -40,7 +41,7 @@ define bundler::install(
     path        => '/bin:/usr/bin:/usr/local/bin',
     unless      => 'bundle check',
     require     => Package['bundler'],
-    logoutput   => on_failure,
+    logoutput   => $logoutput,
     environment => "HOME='${name}'",
   }
 }
