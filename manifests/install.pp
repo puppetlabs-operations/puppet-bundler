@@ -20,6 +20,7 @@ define bundler::install(
   $group      = 'root',
   $deployment = false,
   $without    = undef,
+  $timeout    = 300,
 ) {
 
   include bundler
@@ -42,5 +43,6 @@ define bundler::install(
     require     => Package['bundler'],
     logoutput   => on_failure,
     environment => "HOME='${name}'",
+    timeout     => $timeout,
   }
 }
