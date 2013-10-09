@@ -7,3 +7,5 @@ summary 'Install and manage bundler'
 
 source 'https://github.com/puppetlabs-operations/puppet-bundler'
 project_page 'https://github.com/puppetlabs-operations/puppet-bundler'
+
+dependency 'puppetlabs/ruby', '>= 0.0.2'
