@@ -1,6 +1,7 @@
 define bundler::bundle (
     $source,
-    $gems
+    $gems,
+    $timeout = 300,
 ){
   include bundler
 
@@ -14,6 +15,7 @@ define bundler::bundle (
     command     => "bundle install",
     cwd         => dirname("${name}"),
     refreshonly => true,
+    timeout     => $timeout,
   }
 
 }
