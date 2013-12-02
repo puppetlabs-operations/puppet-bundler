@@ -1,8 +1,8 @@
 define bundler::bundle (
-    $source,
-    $gems,
-    $timeout = 300,
-){
+  $source,
+  $gems,
+  $timeout = 300,
+) {
   include bundler
 
   file { $name:
@@ -17,5 +17,4 @@ define bundler::bundle (
     refreshonly => true,
     timeout     => $timeout,
   }
-
 }
