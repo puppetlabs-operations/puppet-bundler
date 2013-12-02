@@ -1,15 +1,14 @@
-puppet-bundler
-==============
+# Bundler Module
 
-Automatically install ruby dependencies.
+This module automatically install ruby dependencies using Bundler.
 
-Dependencies
-------------
+## Dependencies
 
 - The [`ruby` module](https://github.com/puppetlabs/puppetlabs-ruby) has to be installed alongside this module.
 
-Examples
---------
+## Examples
+
+Deploy a bundle with something like the following.
 
     bundler::install { $app_root:
       user       => $app_user,
@@ -17,3 +16,4 @@ Examples
       deployment => true,
       without    => 'development test doc',
     }
+
