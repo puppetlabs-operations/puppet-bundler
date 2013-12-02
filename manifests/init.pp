@@ -1,4 +1,7 @@
-class bundler($provider = 'gem', $ensure = 'present') {
+class bundler (
+  $provider = 'gem',
+  $ensure   = 'present'
+) {
 
   package { "bundler":
     ensure   => $ensure,
