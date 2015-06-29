@@ -21,6 +21,7 @@ define bundler::install(
   $deployment = false,
   $without    = undef,
   $timeout    = 300,
+  $env        = undef,
 ) {
 
   include bundler
@@ -42,7 +43,7 @@ define bundler::install(
     unless      => 'bundle check',
     require     => Package['bundler'],
     logoutput   => on_failure,
-    environment => "HOME='${name}'",
+    environment => concat($env, "HOME=${name}"),
     timeout     => $timeout,
   }
 }
