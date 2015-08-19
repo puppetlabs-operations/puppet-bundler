@@ -1,0 +1,24 @@
+{
+  "name": "ploperations-bundler",
+  "version": "1.0.1",
+  "author": "Puppet Labs Operations",
+  "summary": "Install and manage bundler",
+  "license": "Apache 2",
+  "source": "https://github.com/puppetlabs-operations/puppet-bundler",
+  "project_page": "https://github.com/puppetlabs-operations/puppet-bundler",
+  "issues_url": "https://github.com/puppetlabs-operations/puppet-bundler/issues",
+  "dependencies": [
+    {
+      "operatingsystem": "Debian"
+    },
+    {
+      "operatingsystem": "Ubuntu"
+    }
+  ],
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 4.2.1"
+    }
+  ]
+}
