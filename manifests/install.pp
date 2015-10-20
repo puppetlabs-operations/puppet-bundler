@@ -21,12 +21,17 @@ define bundler::install(
   $deployment = false,
   $without    = undef,
   $timeout    = 300,
+  $proxy      = undef,
 ) {
 
   include bundler
 
   if $without { $without_real = " --without ${without}" }
   else        { $without_real = '' }
+
+  if $proxy { $bundle_environment = ["HOME='${name}' ","HTTPS_PROXY=${proxy} ","HTTP_PROXY=${proxy} "] }
+  else        { $bundle_environment = ["HOME='${name}' "] }
+
 
   $command = $deployment ? {
     true  => "bundle install --deployment${without_real}",
@@ -42,7 +47,7 @@ define bundler::install(
     unless      => 'bundle check',
     require     => Package['bundler'],
     logoutput   => on_failure,
-    environment => "HOME='${name}'",
+    environment => $bundle_environment,
     timeout     => $timeout,
   }
 }
